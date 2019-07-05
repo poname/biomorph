@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<body ng-app="myApp">
+
+    <div ng-app="myApp" ng-controller="myCtrl" class="container">
+
+        <p class="text-center">Welcome to Biomorph app :)</p>
+
+        <div class="row">
+            <div ng-repeat="item in items" class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <table>
+                        <tr ng-repeat="row in item.data" style="height: {{height}}px">
+                            
+                            <td ng-repeat="cell in row | reverse track by $index" style="background-color:{{cell>5 ? item.color: 'white';}};width: {{width}}px">
+                                
+                            </td>
+
+                            <td ng-repeat="cell in row track by $index" style="background-color:{{cell>5 ? item.color: 'white';}};width: {{width}}px">
+                                
+                            </td>
+                        </tr>
+                    </table>
+                    <p>Sample {{$index+1}}</p>
+                    <button class="btn btn-success" ng-click="mutate(item)">mutate</button>
+                    <button class="btn btn-danfer" ng-click="duplicate(item)">duplicate</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+<style type="text/css">
+    .red {
+        color: red;
+    }
+    
+    .black {
+        color: black;
+    }
+</style>
+
+</html>
