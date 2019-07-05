@@ -3,13 +3,13 @@ app.controller('myCtrl', function($scope) {
 
 	$scope.Math = window.Math
     
-    var totalSamples = 6;
+    var totalSamples = 9;
     $scope.items = [];
     $scope.width = 4;
     $scope.height = 4;
 
-    var cellPerWidth = 64;
-    var cellPerHeight = 64;
+    var cellPerWidth = 32;
+    var cellPerHeight = 32;
 
     init();
 
@@ -23,7 +23,9 @@ app.controller('myCtrl', function($scope) {
     	for (var i = 0; i < number; i++) {
     		$scope.items.push({
     			color: randomColor(),
-    			data: conservedData(cellPerWidth, cellPerHeight)
+    			data: conservedData(cellPerWidth, cellPerHeight),
+    			height: 16,
+    			width: 16
     		});
     	}
     }
@@ -64,7 +66,7 @@ app.controller('myCtrl', function($scope) {
     		}
     	}
 
-    	mutatePoint(data, 15, Math.floor(Math.random() * perHeight), 0, perHeight, perWidth/2);
+    	mutatePoint(data, 20, Math.floor(Math.random() * perHeight), 0, perHeight, perWidth/2);
 
     	return data;
 
@@ -158,11 +160,23 @@ app.controller('myCtrl', function($scope) {
     }
 
     $scope.mutate = function(item) {
-    	item.data = mutateGenome(item.data);
+    	// item.data = mutateGenome(item.data);
+    	var candidates = [];
+    	for (var i = 0; i < item.data.length; i++) {
+    		for (var j = 0; j < item.data[i].length; j++) {
+    			if(item.data[i][j] > 5) {
+    				candidates.push({i:i, j:j});
+    			}
+    		}
+    	}
+    	var startPoint = candidates[Math.floor(Math.random() * candidates.length)];
+    	return mutatePoint(item.data, 16, startPoint.i, startPoint.j, item.data.length, item.data[0].length);
     };
 
     $scope.duplicate = function(item) {
     	item.data = duplicateGenome(item.data);
+    	item.width = item.width/2;
+    	item.height = item.height/2;
     }
 
     // $scope.items = [

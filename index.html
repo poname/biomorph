@@ -10,7 +10,7 @@
 
 <body ng-app="myApp">
 
-    <div ng-app="myApp" ng-controller="myCtrl" class="container">
+    <div ng-app="myApp" ng-controller="myCtrl" class="">
 
         <p class="text-center">Welcome to Biomorph app :)</p>
 
@@ -18,20 +18,20 @@
             <div ng-repeat="item in items" class="col-sm-6 col-md-4">
                 <div class="thumbnail">
                     <table>
-                        <tr ng-repeat="row in item.data" style="height: {{height}}px">
+                        <tr ng-repeat="row in item.data" style="height: {{item.height}}px">
                             
-                            <td ng-repeat="cell in row | reverse track by $index" style="background-color:{{cell>5 ? item.color: 'white';}};width: {{width}}px">
+                            <td ng-repeat="cell in row | reverse track by $index" style="background-color:{{cell>5 ? item.color: 'white';}};width: {{item.width}}px">
                                 
                             </td>
 
-                            <td ng-repeat="cell in row track by $index" style="background-color:{{cell>5 ? item.color: 'white';}};width: {{width}}px">
+                            <td ng-repeat="cell in row track by $index" style="background-color:{{cell>5 ? item.color: 'white';}};width: {{item.width}}px">
                                 
                             </td>
                         </tr>
                     </table>
                     <p>Sample {{$index+1}}</p>
                     <button class="btn btn-success" ng-click="mutate(item)">mutate</button>
-                    <button class="btn btn-danfer" ng-click="duplicate(item)">duplicate</button>
+                    <button class="btn btn-danger" ng-click="duplicate(item)">duplicate</button>
                 </div>
             </div>
         </div>
